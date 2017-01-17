@@ -31,5 +31,13 @@
   "dependencies": {
     "shortid": "^2.2.6",
     "uniloc": "^0.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diorahman/micro-base.git"
+  },
+  "bugs": {
+    "url": "https://github.com/diorahman/micro-base/issues"
+  },
+  "homepage": "https://github.com/diorahman/micro-base#readme"
 }
