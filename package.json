@@ -1,0 +1,35 @@
+{
+  "name": "micro-base",
+  "version": "1.0.0",
+  "description": "micro base",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro example.js",
+    "test": "ava"
+  },
+  "keywords": [
+    "micro",
+    "api",
+    "base"
+  ],
+  "author": "Dhi Aurrahman <dio@hooq.tv>",
+  "license": "MIT",
+  "ava": {
+    "require": [
+      "async-to-gen/register"
+    ],
+    "files": [
+      "test.js"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^0.17.0",
+    "micro": "^6.2.0",
+    "micro-listen-test": "^1.0.0",
+    "tarik": "^1.0.2"
+  },
+  "dependencies": {
+    "shortid": "^2.2.6",
+    "uniloc": "^0.3.0"
+  }
+}
