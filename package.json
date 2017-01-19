@@ -1,11 +1,16 @@
 {
   "name": "micro-suite",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "micro base",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "micro example.js",
-    "test": "ava"
+    "prepublish": "npm run build",
+    "build": "mkdir -p dist && async-to-gen index.js > dist/index.js",
+    "test": "standard && ava"
   },
   "keywords": [
     "micro",

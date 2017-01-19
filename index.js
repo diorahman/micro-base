@@ -41,7 +41,7 @@ function serve (routes, settings = {}) {
         // sends back no-content
         return send(res, 204, null)
       }
-      return result;
+      return result
     } catch (err) {
       const {renderError} = settings
       if (typeof renderError === 'function') {
