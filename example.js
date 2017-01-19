@@ -22,6 +22,13 @@ module.exports = API([
     }
   },
   {
+    method: 'POST',
+    path: '/hello',
+    handler: async (req, res) => {
+      return req.body
+    }
+  },
+  {
     method: 'GET',
     path: '/',
     handler: async (req, res) => {
