@@ -32,7 +32,7 @@ const app = API([
       throw new Error('HAHAHA')
     }
   }
-], { renderError: (err) => { return {message: 'LOL'}}})
+], {renderError: (err) => { return {message: `${err.message} is LOL`} }})
 
 test('ok', async (t) => {
   const url = await listen(app)
@@ -57,5 +57,5 @@ test('custom err', async (t) => {
   const url = await listen(app)
   const {body, statusCode} = await request.get(`${url}/err`)
   t.deepEqual(statusCode, 500)
-  t.deepEqual(body.message, 'LOL')
+  t.deepEqual(body.message, 'HAHAHA is LOL')
 })
