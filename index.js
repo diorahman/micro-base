@@ -31,12 +31,17 @@ function serve (routes, settings = {}) {
 
   return async (req, res) => {
     const {name, options} = router.lookup(req.url, req.method)
-    if (/json/.test(req.headers['Content-Type'])) {
+    if (/json/.test(req.headers['content-type'])) {
       req.body = await json(req)
     }
     req.options = options
     try {
-      return await handlers[name](req, res)
+      const result = await handlers[name](req, res)
+      if (result === null || result === undefined) {
+        // sends back no-content
+        return send(res, 204, null)
+      }
+      return result;
     } catch (err) {
       const {renderError} = settings
       if (typeof renderError === 'function') {
