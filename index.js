@@ -45,7 +45,7 @@ function serve (routes, settings = {}) {
     } catch (err) {
       const {renderError} = settings
       if (typeof renderError === 'function') {
-        let message = renderError(err)
+        let message = renderError(err, req, res)
         if (DEV) {
           if (typeof message === 'object') {
             if (Array.isArray(message)) {
