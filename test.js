@@ -53,6 +53,12 @@ test('empty', async (t) => {
   t.deepEqual(body, '')
 })
 
+test('not found', async (t) => {
+  const url = await listen(app)
+  const {statusCode} = await request.get(`${url}/hihi`)
+  t.deepEqual(statusCode, 404)
+})
+
 test('custom err', async (t) => {
   const url = await listen(app)
   const {body, statusCode} = await request.get(`${url}/err`)

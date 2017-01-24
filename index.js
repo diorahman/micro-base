@@ -36,6 +36,10 @@ function serve (routes, settings = {}) {
     }
     req.options = options
     try {
+      const fn = handlers[name]
+      if (!fn) {
+        throw new HttpError('Not found', 404, '0000')
+      }
       const result = await handlers[name](req, res)
       if (result === null || result === undefined) {
         // sends back no-content
