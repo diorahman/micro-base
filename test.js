@@ -31,6 +31,10 @@ const app = API([
     handler: async (req, res) => {
       throw new Error('HAHAHA')
     }
+  },
+  {
+    method: 'GET',
+    path: '/fake'
   }
 ], {renderError: (err) => { return {message: `${err.message} is LOL`} }})
 
@@ -57,6 +61,18 @@ test('not found', async (t) => {
   const url = await listen(app)
   const {statusCode} = await request.get(`${url}/hihi`)
   t.deepEqual(statusCode, 404)
+})
+
+test('get but with content-type', async (t) => {
+  const url = await listen(app)
+  const {statusCode} = await request.get(url, { headers: { 'Content-Type': 'application/json' } })
+  t.deepEqual(statusCode, 200)
+})
+
+test('get fake', async (t) => {
+  const url = await listen(app)
+  const {statusCode} = await request.get(`${url}/fake`)
+  t.deepEqual(statusCode, 501)
 })
 
 test('custom err', async (t) => {

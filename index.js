@@ -1,10 +1,8 @@
+const id = require('shortid')
 const create = require('uniloc')
 const {json, send} = require('micro')
-const id = require('shortid')
 
 const DEV = process.env.NODE_ENV === 'development'
-
-async function unhandled () { throw new Error('Unhandled') }
 
 class HttpError extends Error {
   constructor (message, statusCode, internal) {
@@ -14,6 +12,8 @@ class HttpError extends Error {
     this.statusCode = statusCode
   }
 }
+
+async function unhandled () { throw new HttpError('Not Implemented', '501', '0000') }
 
 module.exports = exports = serve
 exports.HttpError = HttpError
@@ -32,7 +32,14 @@ function serve (routes, settings = {}) {
   return async (req, res) => {
     const {name, options} = router.lookup(req.url, req.method)
     if (/json/.test(req.headers['content-type'])) {
-      req.body = await json(req)
+      try {
+        req.body = await json(req)
+      } catch (err) {
+        // allocate this empty body if failed to parse
+        // FIXME: should get the raw body instead?
+        // anyway, since the client said it sends json
+        req.body = {}
+      }
     }
     req.options = options
     try {
